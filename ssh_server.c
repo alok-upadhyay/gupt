@@ -1,4 +1,4 @@
-/* Title	:	AlokSSH - A minimal SSH server						*/
+/* Title	:	guptSSH - A minimal SSH server						*/
 /* Source	:	ssh_server.c 								*/	
 /* Date		:	12/03/2012	   							*/
 /* Author	:	Alok Upadhyay	   							*/
@@ -87,7 +87,7 @@ void adminMenu()
 {
 	int chosen_option;	
 	
-	printf("\n\n		Welcome to the AlokSSH Server Admin Console		\n\n");
+	printf("\n\n		Welcome to the guptSSH Server Admin Console		\n\n");
 	printf("The server is not running, it needs your permission to power up. Also, you can do some administrative tasks like adding/deleting users before powering the server up.\n");
 	printf("Please choose one of the following:\n");
 	printf("1. Create Account\n");
@@ -124,7 +124,7 @@ void addUser()
 	
 	//strcpy(username, "anil kumar");	
 	
-	printf("\n	Welcome to the user account creation facility of the AlokSSH Server!		\n");
+	printf("\n	Welcome to the user account creation facility of the guptSSH Server!		\n");
 	printf("\nPlease enter the name of the user: ");
 	gets(username);
 	//while (getchar() != '\n');
@@ -399,7 +399,7 @@ void setupServerPrimaries()
 {
 
 	/*Defining the prompt*/
-	char prompt[] = "alokSSH:~>";
+	char prompt[] = "guptSSH:~>";
 	strcpy(send_data, prompt);
 		
 	control_port = CONTROL_PORT_NO;
@@ -464,7 +464,7 @@ void serveClients()
 	      send(connected, send_data,strlen(send_data), 0);  
 	      strcpy(response, "");
 	      strcpy(buffer, "");	
-	      strcpy(send_data, "alokSSH:~>");
+	      strcpy(send_data, "guptSSH:~>");
 
 	
               bytes_recieved = recv(connected, recv_data, 1024, 0);
