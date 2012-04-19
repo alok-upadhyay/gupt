@@ -2,4 +2,79 @@ This was done as a part of one of the assignments for my Computer Networks cours
 
 Author : Alok Upadhyay.
 
+=========================================================================
+HOW TO COMPILE:
+server
+gcc ssh_server.c -o guptSSHServer -lssl -lcrypto
+
+client 
+gcc ssh_client.c -o guptSSHClient -lssl -lcrypto
+
+usage 
+./guptSSHClient <username>@<server-ip>
+
+=========================================================================
+HOW TO USE:
+
+* Run the server binary first on the server machine.
+
+* Then run the client compiled binary in the client machine, and please do remember to give the server IP as the commandline argument.
+
+* You can close the session by using the 'bye' command. The server will close the running connection, and come into the waitingForClient mode.
+
+* Limitations: The server doesn't cater to more than one client at a time. However, it can serve multiple clients at different times, after the preceding client has gone.
+ 
+* Limitations: There is some race-condition happening due to which sometimes the prompt 'guptSSH:~> ' doesnot appear on the client side, even the banner is appearing. To sort this out do Ctrl+C on the client side, the server will go into waiting state again, run the client again. In one or two times the prompt will appear and you may run your commands. 
+
+=========================================================================
+ABOUT THE CODE:
+
+# I have used inband data transfer, i.e., the control-messages/prompts as well as the file data are sent through the same connection on server port 2222.
+
+# There are two source files, namely SSH_server.c and SSH_client.c, for the corresponding functions in the system.
+
+# I have also included the compiled binaries of my source files, namely SSHServer.out and SSHClient.out, which you can use to directly test the code.
+
+# The SSH_server.c is the one responsible for majority of the actions which are conducted by this SSH ( I have named it as guptSSH :P ).
+
+# The SSH_client.c is the file which is basically responsible for printing the server messages/prompts on the user console etc. And also creating the local copies of files when doing the 'get <file>' .
+
+
+# SSH_server.c has its work divided into many sub-routines mainly :
+
+	void setupServerPrimaries();		=== responsible for creating the socket and other misc. data structures.
+
+	void serveClients();			=== is the routine responsible for idle waiting for client connection requests. Happens everytime a user leaves, as the server then starts to wait for the next coming client.
+
+	void closeSocket();			=== is the separate function to separate the connection closing logic.
+
+	void executeCommand(char *);		=== is the routine which is responsible for executing the command recieved from client on the server.
+
+	void transferFile(char *);		=== is the separate function which sends file to the client (when 'get' command is used by the user). I have used the sendfile() function found in the sys/sendfile.h library for sending files.
+
+	void writeToFile(char *, char *);	=== is the separate function invoked when the user sends the 'put' command. It is responsible for creating a local copy of the file and writing the data recieved into it.
+
+
+
+# It may be noted that all of the prompts and the response messages which are shown on the client side are generated at ther server-side and only displayed on the client side. While the server side keeps displaying the info which may be useful for the server-admin.
+
+
+
+# While SSH_client.c is less complex since it has very few responsibilities in comparison.
+
+	int main(int argc, char **argv) 	=== the main function here retains certain important functionalites like creating the socket sock, connecting witht the given server ip in argv[1].
+
+	void writeToFile(char *, char *);	=== is the separate function invoked when the user sends the 'put' command. It is responsible for creating a local copy of the file and writing the data recieved into it.
+
+	void transferFile(char *);		=== is the separate function which sends file to the client (when 'get' command is used by the user). I have used the sendfile() function found in the sys/sendfile.h library for sending files.
+
+
+
+============================================================================
+
+
+In case you have any queries to discuss, please drop a mail to f2009583@bits-goa.ac.in, or give a call to 09637423502. I shall be come to your chamber and discuss the matter.  
+
+
+Thank You for you patience! :)
 
