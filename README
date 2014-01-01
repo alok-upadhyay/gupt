@@ -1,14 +1,14 @@
-This was done as a part of one of the assignments for my Computer Networks course last month.
+This was done as a part of one of the assignments for my Computer Networks course.
 
 Author : Alok Upadhyay.
 
 =========================================================================
 HOW TO COMPILE:
-server
-gcc ssh_server.c -o guptSSHServer -lssl -lcrypto
+:Server:
+$ make
 
-client 
-gcc ssh_client.c -o guptSSHClient -lssl -lcrypto
+:Client:
+$ gcc ssh_client.c -o guptSSHClient -lssl -lcrypto
 
 usage 
 ./guptSSHClient <username>@<server-ip>

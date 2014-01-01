@@ -31,35 +31,12 @@
 #include <errno.h>
 #include <string.h>
 #include <openssl/sha.h>
-
+#include "ssh_server.h"
 
 /* Pre-processor directives */
 #define DELIM " "
 #define die(e) do { fprintf(stderr, e); exit(EXIT_FAILURE); } while (0);
 #define CONTROL_PORT_NO 2222;
-
-
-
-/* Functions and subroutines declaration */
-void setupServerPrimaries();
-void serveClients();
-void closeSocket();
-void executeCommand(char *);
-void transferFile(char *);
-void writeToFile(char *, char *);
-void createPasswordFile();
-void adminMenu();
-void addUser();
-void delUser();
-void hash_pass(unsigned char *, unsigned char *);
-void writeToPasswordFile(char *, unsigned char *);
-void createUserDIR(char *);
-void powerUpServer();
-void recieveUsername();
-void globalAuthManager();
-void sendAuthPrompt();
-void recievePassHash();
-
 
 /* Global data-structures */
 int sock, connected, bytes_recieved , fd, true = 1, control_port, file_bytes_recieved;
