@@ -8,10 +8,15 @@ HOW TO COMPILE:
 $ make
 
 :Client:
-$ gcc ssh_client.c -o guptSSHClient -lssl -lcrypto
+$ make 
 
-usage 
-./guptSSHClient <username>@<server-ip>
+:Usage:
+
+:Fire up the server from server dir:
+$ ./guptSSHServer
+
+:Fire up the client from client dir: 
+$ ./guptSSHClient <username>@<server-ip>
 
 =========================================================================
 HOW TO USE:

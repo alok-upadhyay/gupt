@@ -13,4 +13,4 @@ guptSSHServer : $(OBJ)
 .PHONY: clean
 
 clean : 
-	rm guptSSHServer $(OBJ) 
+	rm -f guptSSHServer $(OBJ) *.o .*.swp .*.swo .*.swn 
